@@ -26,3 +26,14 @@
         (assert (adjacent ?node ?adjacent))
     )
 )
+
+; Definim regula de colorare
+(defrule color-node
+    (adjacent ?node $?adjacent)
+    (colors $?colors)
+    (not (colored ?node $?))
+    =>
+    (bind ?color (nth$ (random 0 (length$ $?colors)) $?colors))
+    (assert (colored ?node ?color))
+    (printout t "Coloring " ?node " with " ?color "..." crlf)
+)
