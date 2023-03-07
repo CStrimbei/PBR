@@ -28,3 +28,16 @@
 
 
 ; Definim regula de colorare
+(defrule colornodes
+    (colors $?colors)
+    (nodes $?nodes)
+    (adjacent $?adjacent)
+    =>
+    (bind ?node (nth$ ?nodes (random (length$ ?nodes))))
+    (bind ?color (nth$ ?colors (random (length$ ?colors))))
+    (assert (colored ?node ?color))
+    (retract (nodes ?node))
+    (retract (adjacent ?adjacent))
+    (retract (colors ?color))
+)
+)
