@@ -16,7 +16,7 @@
     (assert (nodes (explode$ ?input)))
 )
 
-(defrule color-nodes
+(defrule define-adjacent
     (nodes $?nodes)
     (colors $?colors)
     =>
