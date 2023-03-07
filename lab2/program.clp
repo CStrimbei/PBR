@@ -16,24 +16,15 @@
     (assert (nodes (explode$ ?input)))
 )
 
-(defrule define-adjacent
-    (nodes $?nodes)
-    =>
-    (foreach ?node ?nodes
-        (printout t "Enter the list of adjacent nodes for " ?node ": ")
-        (bind ?input (readline))
-        (bind ?adjacent (explode$ ?input))
-        (assert (adjacent ?node ?adjacent))
-    )
+(defrule define-adj
+   =>
+   (printout t "Enter a pair of adjacent nodes or type 'done' to continue: ")
+   (bind ?input (readline))
+   (while (not (eq ?input "done"))
+      (assert (adjacent (explode$ ?input)))
+      (printout t "Enter a pair of adjacent nodes or type 'done' to continue: ")
+      (bind ?input (readline)))
 )
 
+
 ; Definim regula de colorare
-(defrule color-node
-    (adjacent ?node $?adjacent)
-    (colors $?colors)
-    (not (colored ?node ?color))
-    =>
-    (bind ?color (nth$ (random 0 (length$ $?colors)) $?colors))
-    (assert (colored ?node ?color))
-    (printout t "Coloring " ?node " with " ?color "..." crlf)
-)
