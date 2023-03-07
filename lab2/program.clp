@@ -31,7 +31,7 @@
 (defrule color-node
     (adjacent ?node $?adjacent)
     (colors $?colors)
-    (not (colored ?node $?))
+    (not (colored ?node ?color))
     =>
     (bind ?color (nth$ (random 0 (length$ $?colors)) $?colors))
     (assert (colored ?node ?color))
