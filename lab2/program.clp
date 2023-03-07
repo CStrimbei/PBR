@@ -18,7 +18,6 @@
 
 (defrule define-adjacent
     (nodes $?nodes)
-    (colors $?colors)
     =>
     (foreach ?node ?nodes
         (printout t "Enter the list of adjacent nodes for " ?node ": ")
