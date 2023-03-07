@@ -16,12 +16,14 @@
     (assert (nodes (explode$ ?input)))
 )
 
-; Definim perechile de tari vecine
-(defrule define-edges
-    (not (edges $?))
+(defrule color-nodes
+    (nodes $?nodes)
+    (colors $?colors)
     =>
-    (printout t "Enter the list of edges (pairs of nodes), separated by spaces: ")
-    (bind ?input (readline))
-    (assert (edges (explode$ ?input)))
+    (foreach ?node ?nodes
+        (printout t "Enter the list of adjacent nodes for " ?node ": ")
+        (bind ?input (readline))
+        (bind ?adjacent (explode$ ?input))
+        (assert (adjacent ?node ?adjacent))
+    )
 )
-
